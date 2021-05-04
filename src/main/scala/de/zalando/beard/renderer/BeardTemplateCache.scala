@@ -4,8 +4,8 @@ import de.zalando.beard.ast.BeardTemplate
 import scala.collection.immutable.Map
 
 /**
- * @author dpersa
- */
+  * @author dpersa
+  */
 class BeardTemplateCache {
 
   var cache = Map[TemplateName, BeardTemplate]()

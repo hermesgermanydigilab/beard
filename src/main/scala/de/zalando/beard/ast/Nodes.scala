@@ -11,10 +11,7 @@ case class AttrInterpolation(identifier: Identifier, attributes: Seq[Attribute] 
   def attributeMap = attributes.map(attr => attr.key -> attr.stringValue).toMap
 }
 
-case class IdInterpolation(
-    identifier: CompoundIdentifier,
-    filters: Seq[FilterNode] = Seq.empty)
-  extends Interpolation
+case class IdInterpolation(identifier: CompoundIdentifier, filters: Seq[FilterNode] = Seq.empty) extends Interpolation
 
 case class YieldStatement() extends Statement
 
@@ -30,24 +27,24 @@ case class IfStatement(condition: CompoundIdentifier, ifStatements: Seq[Statemen
 
 case class UnlessStatement(condition: CompoundIdentifier, unlessStatements: Seq[Statement], elseStatements: Seq[Statement] = Seq.empty) extends Statement
 
-case class ForStatement(identifier: Identifier, index: Option[Identifier], collection: CompoundIdentifier,
-    statements: Seq[Statement] = Seq.empty, addNewLine: Boolean = false) extends Statement
+case class ForStatement(identifier: Identifier, index: Option[Identifier], collection: CompoundIdentifier, statements: Seq[Statement] = Seq.empty, addNewLine: Boolean = false)
+    extends Statement
 
 case class FilterNode(identifier: Identifier, parameters: Seq[Attribute] = Seq.empty)
 
 sealed trait Attribute {
-  def key: String
+  def key:         String
   def stringValue: Option[String]
-  def identifier: Option[CompoundIdentifier]
+  def identifier:  Option[CompoundIdentifier]
 }
 
 case class AttributeWithValue(key: String, value: String) extends Attribute {
-  def identifier = None
+  def identifier  = None
   def stringValue = Some(value)
 }
 
 case class AttributeWithIdentifier(key: String, id: CompoundIdentifier) extends Attribute {
-  def identifier = Some(id)
+  def identifier  = Some(id)
   def stringValue = None
 }
 
@@ -66,14 +63,14 @@ case class White(times: Int) extends Statement with HasText {
 }
 
 case class BeardTemplate(
-    statements: Seq[Statement],
-    extended: Option[ExtendsStatement] = None,
-    renderStatements: Seq[RenderStatement] = Seq.empty,
-    contentForStatements: Seq[ContentForStatement] = Seq.empty)
+  statements:           Seq[Statement],
+  extended:             Option[ExtendsStatement] = None,
+  renderStatements:     Seq[RenderStatement]     = Seq.empty,
+  contentForStatements: Seq[ContentForStatement] = Seq.empty
+)
 
 object EmptyBeardTemplate extends BeardTemplate(Seq.empty)
 
 case class CompoundIdentifier(identifierPart: String, identifierParts: Seq[String] = Seq.empty)
 
 case class Identifier(identifier: String)
-
