@@ -6,7 +6,7 @@ licenses += ("Apache-2.0", url("http://www.apache.org/licenses/"))
 scalaVersion := "2.12.12"
 scalacOptions := Seq("-unchecked", "-feature", "-deprecation", "-encoding", "utf8")
 
-val antlrVersion = "4.8-1"
+val antlrVersion = "4.7.2"
 
 enablePlugins(Antlr4Plugin)
 
