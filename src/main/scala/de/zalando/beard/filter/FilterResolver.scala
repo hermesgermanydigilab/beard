@@ -6,25 +6,27 @@ import org.slf4j.LoggerFactory
 import scala.collection.immutable.{Map, Seq, Set}
 
 /**
- * @author dpersa
- */
+  * @author dpersa
+  */
 trait FilterResolver {
 
-  def registeredFilters = Seq(
-    AbsFilter(),
-    CapitalizeFilter(),
-    CurrencyFilter(),
-    DateFormatFilter(),
-    FirstFilter(),
-    LastFilter(),
-    LowercaseFilter(),
-    NumberFilter(),
-    ReverseFilter(),
-    TranslationFilter(),
-    TitleFilter(),
-    TrimFilter(),
-    UppercaseFilter(),
-    UrlEncodeFilter())
+  def registeredFilters =
+    Seq(
+      AbsFilter(),
+      CapitalizeFilter(),
+      CurrencyFilter(),
+      DateFormatFilter(),
+      FirstFilter(),
+      LastFilter(),
+      LowercaseFilter(),
+      NumberFilter(),
+      ReverseFilter(),
+      TranslationFilter(),
+      TitleFilter(),
+      TrimFilter(),
+      UppercaseFilter(),
+      UrlEncodeFilter()
+    )
 
   def filters: Map[String, Filter]
 
@@ -42,9 +44,12 @@ case class DefaultFilterResolver(userFilters: Seq[Filter] = Seq()) extends Filte
 
   override def filters: Map[String, Filter] = {
     // User Filters overwrites registered filters map
-    (registeredFilters ++ userFilters).map {
-      case filter =>
-        (filter.name, filter)
-    }.toList.toMap[String, Filter]
+    (registeredFilters ++ userFilters)
+      .map {
+        case filter =>
+          (filter.name, filter)
+      }
+      .toList
+      .toMap[String, Filter]
   }
 }

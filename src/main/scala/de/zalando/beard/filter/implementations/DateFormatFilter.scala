@@ -1,6 +1,6 @@
 package de.zalando.beard.filter.implementations
 
-import java.time.{ZoneId, LocalDateTime, LocalDate, OffsetDateTime, Instant}
+import java.time.{Instant, LocalDate, LocalDateTime, OffsetDateTime, ZoneId}
 import java.time.format.DateTimeFormatter
 
 import de.zalando.beard.filter._
@@ -9,8 +9,8 @@ import scala.collection.immutable.Map
 import scala.util.matching.Regex
 
 /**
- * @author rweyand
- */
+  * @author rweyand
+  */
 class DateFormatFilter extends Filter {
   // {{ now | date format=format.Variable}}
   override def name = "date"
@@ -37,7 +37,7 @@ class DateFormatFilter extends Filter {
     // All formatters supported by DateTimeFormatter may be added in a form:
     //  """REGEX""" -> "FORMATTER"
     // Grouping is not allowed: '(', ')' chars must be escaped, if used
-    val datePatterns: Map[String, String] = Map (
+    val datePatterns: Map[String, String] = Map(
       // 981173106
       """\d{9,10}""" -> "EPOCH",
       // 981173106987
@@ -81,11 +81,11 @@ class DateFormatFilter extends Filter {
     )
 
     val pattern = new Regex(datePatterns.keys.mkString("^((", ")|(", "))$"))
-    val a = pattern.findFirstMatchIn(value)
+    val a       = pattern.findFirstMatchIn(value)
 
     if (a.isDefined) {
       val patternIndex = a.get.subgroups.indexOf(value, 1)
-      val formatIn = datePatterns.slice(patternIndex - 1, patternIndex).values.mkString
+      val formatIn     = datePatterns.slice(patternIndex - 1, patternIndex).values.mkString
 
       return formatIn match {
         case "EPOCH"                => getFormatFromEpoch(value, formatOut)

@@ -1,8 +1,8 @@
 package de.zalando.beard.renderer
 
 /**
- * @author cesarla
- */
+  * @author cesarla
+  */
 trait EscapeStrategy {
 
   def escape(text: String): String
@@ -22,7 +22,7 @@ class VanillaEscapeStrategy extends EscapeStrategy {
 }
 
 object EscapeStrategy {
-  lazy val xml = html
-  lazy val html = new XMLEscapeStrategy()
+  lazy val xml     = html
+  lazy val html    = new XMLEscapeStrategy()
   lazy val vanilla = new VanillaEscapeStrategy()
 }

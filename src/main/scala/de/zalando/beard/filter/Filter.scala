@@ -7,8 +7,8 @@ import scala.annotation.tailrec
 import scala.collection.immutable.Map
 
 /**
- * @author dpersa
- */
+  * @author dpersa
+  */
 trait Filter {
   def name: String
 
@@ -18,11 +18,11 @@ trait Filter {
     value.map(v => apply(v.toString, parameters))
 
   /**
-   * Although a map is just an Iterable[(A, B)] it's hard to match on this type
-   * because of how tuple are defined in scala, Map[String, String] is not a subtype of Iterable[String].
-   */
+    * Although a map is just an Iterable[(A, B)] it's hard to match on this type
+    * because of how tuple are defined in scala, Map[String, String] is not a subtype of Iterable[String].
+    */
   def applyMap(value: Map[_, _], parameters: Map[String, Any] = Map()): Map[String, String] =
-    value.map{ case (k, v) => (k.toString, apply(v.toString, parameters)) }
+    value.map { case (k, v) => (k.toString, apply(v.toString, parameters)) }
 }
 
 class FilterException(message: String) extends RuntimeException(message)
@@ -242,4 +242,3 @@ class AbsFilter extends Filter {
   override def apply(value: String, parameters: Map[String, Any]): String =
     Math.abs(BigDecimal(value).toLong).toString
 }
-

@@ -3,8 +3,8 @@ package de.zalando.beard.renderer
 import java.io.StringWriter
 
 /**
- * @author dpersa
- */
+  * @author dpersa
+  */
 trait RenderResult[T] {
   def write(string: String): Unit
 

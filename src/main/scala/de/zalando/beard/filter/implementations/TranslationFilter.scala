@@ -4,15 +4,15 @@ import java.util.{Locale, ResourceBundle}
 import de.zalando.beard.filter.{Filter, ParameterMissingException}
 
 /**
- * @author rweyand
- */
+  * @author rweyand
+  */
 class TranslationFilter() extends Filter {
 
   override def name: String = "translate"
 
   override def apply(value: String, parameters: Map[String, Any]): String = {
     val localeStringParam = parameters.get("locale")
-    val bundleNameParam = parameters.get("bundle")
+    val bundleNameParam   = parameters.get("bundle")
     (localeStringParam, bundleNameParam) match {
       case (Some(locale: Locale), Some(bundleName: String)) => {
         fetchStringFromBundle(locale, bundleName, value)
@@ -33,4 +33,3 @@ class TranslationFilter() extends Filter {
 object TranslationFilter {
   def apply(): TranslationFilter = new TranslationFilter()
 }
-
